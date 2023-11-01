@@ -1,1 +1,156 @@
 
+CREATE TABLE `user` (
+	`userid`	varchar(10)	NOT NULL,
+	`user_name`	varchar(10)	NOT NULL,
+	`passwd`	varchar(10)	NOT NULL,
+	`dept_nm`	varchar(10)	NOT NULL,
+	`use_yn`	char(1)	NOT NULL	DEFAULT Y,
+	`remark`	varchar(255)	NULL,
+	`regDate`	TIMESTAMP	NOT NULL	DEFAULT now()
+);
+
+CREATE TABLE `menu_code` (
+	`menu_code`	char(4)	NOT NULL,
+	`menu_name`	varchar(20)	NOT NULL,
+	`menu_pos`	varchar(10)	NOT NULL,
+	`use_yn`	char(1)	NOT NULL	DEFAULT Y,
+	`last_modi`	TIMESTAMP	NOT NULL	DEFAULT now()
+);
+
+CREATE TABLE `menu_gran` (
+	`userid`	varchar(10)	NOT NULL,
+	`menu_code`	char(4)	NOT NULL,
+	`g_read`	char(1)	NOT NULL	DEFAULT Y,
+	`g_write`	char(1)	NOT NULL	DEFAULT N,
+	`g_delete`	char(1)	NOT NULL	DEFAULT N,
+	`use_yn`	char(1)	NOT NULL	DEFAULT Y,
+	`last_modi`	TIMESTAMP	NOT NULL	DEFAULT now()
+);
+
+CREATE TABLE `doc_code` (
+	`doc_sort`	varchar(20)	NOT NULL,
+	`doc_step`	varchar(20)	NOT NULL,
+	`doc_activity`	varchar(20)	NOT NULL,
+	`doc_task`	varchar(20)	NOT NULL,
+	`doc_output`	varchar(20)	NOT NULL,
+	`use_yn`	char(1)	NOT NULL	DEFAULT Y,
+	`last_modi`	TIMESTAMP	NOT NULL	DEFAULT now()
+);
+
+CREATE TABLE `doc_info` (
+	`doc_seq`	int	NOT NULL	COMMENT 'auto_increment',
+	`doc_sort`	varchar(20)	NOT NULL,
+	`doc_step`	varchar(20)	NOT NULL,
+	`doc_activity`	varchar(20)	NOT NULL,
+	`doc_task`	varchar(20)	NOT NULL,
+	`doc_output`	varchar(20)	NOT NULL,
+	`userid`	varchar(10)	NOT NULL,
+	`file_nm`	varchar(100)	NULL,
+	`file_pos`	varchar(255)	NULL,
+	`file_comment`	text	NULL,
+	`file_dn_link`	varchar(255)	NULL,
+	`remark`	varchar(255)	NULL
+);
+
+CREATE TABLE `common_code` (
+	`cm_code_grup`	VARCHAR(255)	NOT NULL,
+	`cm_code_detail`	VARCHAR(255)	NOT NULL,
+	`cm_code_nm`	VARCHAR(255)	NOT NULL,
+	`cm_code_sort`	VARCHAR(255)	NOT NULL	COMMENT 'auto_increment',
+	`use_yn`	VARCHAR(255)	NOT NULL	DEFAULT Y
+);
+
+ALTER TABLE `user` ADD CONSTRAINT `PK_USER` PRIMARY KEY (
+	`userid`
+);
+
+ALTER TABLE `menu_code` ADD CONSTRAINT `PK_MENU_CODE` PRIMARY KEY (
+	`menu_code`
+);
+
+ALTER TABLE `menu_gran` ADD CONSTRAINT `PK_MENU_GRAN` PRIMARY KEY (
+	`userid`,
+	`menu_code`
+);
+
+ALTER TABLE `doc_code` ADD CONSTRAINT `PK_DOC_CODE` PRIMARY KEY (
+	`doc_sort`,
+	`doc_step`,
+	`doc_activity`,
+	`doc_task`,
+	`doc_output`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `PK_DOC_INFO` PRIMARY KEY (
+	`doc_seq`,
+	`doc_sort`,
+	`doc_step`,
+	`doc_activity`,
+	`doc_task`,
+	`doc_output`,
+	`userid`
+);
+
+ALTER TABLE `common_code` ADD CONSTRAINT `PK_COMMON_CODE` PRIMARY KEY (
+	`cm_code_grup`,
+	`cm_code_detail`,
+	`cm_code_nm`,
+	`cm_code_sort`
+);
+
+ALTER TABLE `menu_gran` ADD CONSTRAINT `FK_user_TO_menu_gran_1` FOREIGN KEY (
+	`userid`
+)
+REFERENCES `user` (
+	`userid`
+);
+
+ALTER TABLE `menu_gran` ADD CONSTRAINT `FK_menu_code_TO_menu_gran_1` FOREIGN KEY (
+	`menu_code`
+)
+REFERENCES `menu_code` (
+	`menu_code`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_doc_code_TO_doc_info_1` FOREIGN KEY (
+	`doc_sort`
+)
+REFERENCES `doc_code` (
+	`doc_sort`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_doc_code_TO_doc_info_2` FOREIGN KEY (
+	`doc_step`
+)
+REFERENCES `doc_code` (
+	`doc_step`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_doc_code_TO_doc_info_3` FOREIGN KEY (
+	`doc_activity`
+)
+REFERENCES `doc_code` (
+	`doc_activity`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_doc_code_TO_doc_info_4` FOREIGN KEY (
+	`doc_task`
+)
+REFERENCES `doc_code` (
+	`doc_task`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_doc_code_TO_doc_info_5` FOREIGN KEY (
+	`doc_output`
+)
+REFERENCES `doc_code` (
+	`doc_output`
+);
+
+ALTER TABLE `doc_info` ADD CONSTRAINT `FK_user_TO_doc_info_1` FOREIGN KEY (
+	`userid`
+)
+REFERENCES `user` (
+	`userid`
+);
+
