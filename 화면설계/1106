@@ -1,0 +1,25 @@
+회원가입 유효성 검사
+1. 회원가입 버튼 클릭 시 id,pw,nm null 확인 완료
+2. id/pw/nm 정규식 완료
+3. 부서 select ->사용자가 selectBox에 입력한 데이터를 검증(validate()) -> 진행중
+
+onkeyup
+1. id,pw,nm -> innerHTML 완료
+
+로그인 후 문서관리 (main)이동
+1. ajax 처리 (JSON) -> 모든결과를 error 로 받는데 코드는 또 200임 -> 진행중
+2. 유효성 검사 처리 완료(공백, 정규식)
+
+부서 select value 가져오기 -> 진행중
+
+문서 업로드 유효성 검사 -> 진행중
+
+회원가입 페이지 취소 버튼
+1. confrim - Y 로그인 페이지 이동, N 그대로 유지 완료
+
+문서 관리
+1. 문서 grid cell 클릭 시 상세페이지 (oncellclick) 완료
+2. 문서 grid cell 클릭 시 상세페이지 datalist 연동 -> 진행중
+3. grid에 checkbox 추가 및 화면 수정 -> 진행중
+4. grid cell readonly = true 완료
+5. 정렬 onsert -> 진행중
