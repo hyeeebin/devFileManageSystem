@@ -1,7 +1,8 @@
 회원가입 유효성 검사
 1. 회원가입 버튼 클릭 시 id,pw,nm null 확인 완료
 2. id/pw/nm 정규식 완료
-3. 부서 select ->사용자가 selectBox에 입력한 데이터를 검증(validate()) -> 진행중
+3. 부서 select ->사용자가 selectBox에 입력한 데이터를 검증(validate()) -> 완료
+4. 모든 유효성 검사 통과 시 회원가입 성공(ajax, 데이터는 json 형태로 넘어가도록) -> 진행중 
 
 onkeyup
 1. id,pw,nm -> innerHTML 완료
