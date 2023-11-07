@@ -21,6 +21,6 @@ onkeyup
 문서 관리
 1. 문서 grid cell 클릭 시 상세페이지 (oncellclick) -> 완료
 2. 문서 grid cell 클릭 시 상세페이지 datalist 연동 -> 진행중
-3. grid에 checkbox 추가 및 화면 수정 -> 진행중
+3. grid에 checkbox 추가 및 화면 수정 -> 완료
 4. grid cell readonly = true -> 완료
 5. 정렬 onsert -> 진행중
