@@ -30,15 +30,5 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<!-- wq 확장자에 대한 요청을 처리할 servlet-mapping 추가 -->
-	<servlet>
-		<servlet-name>websquareDispatcher</servlet-name>
-		<servlet-class>websquare.http.DefaultRequestDispatcher</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>websquareDispatcher</servlet-name>
-		<url-pattern>*.wq</url-pattern>
-	</servlet-mapping> 
 
 </web-app>

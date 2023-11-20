@@ -5,9 +5,18 @@
 		<result column="id" property="id"/>
 		<result column="pwd" property="pwd"/>
 		<result column="name" property="name"/>
+		<result column="dept_nm" property="dept_nm"/>
+		<result column="remark" property="remark"/>
+		<result column="regDate" property="regDate"/>
+		<result column="use_yn" property="use_yn"/>
 	</resultMap>
 	
 	<select id="getUserList" resultMap="UserVO">
-		select * from user
+		select * from user order by regDate
 	</select>
+	
+	<insert id="join" parameterType="java.util.Map">
+		insert into user(id, pwd, name, dept_nm)
+		values (#{id},#{pwd},#{name},#{dept_nm})
+	</insert>
 </mapper>
