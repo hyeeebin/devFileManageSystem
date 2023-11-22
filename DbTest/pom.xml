@@ -52,7 +52,20 @@
 			<version>1.3.1</version>
 		</dependency>
 
-
+		<!-- xls -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		
+		<!-- xlsx-->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>3.7</version>
+		</dependency>
+		
 		<!-- 실행할 sql과 바인딩 할 파라미터를 넘겨줌. Spring JDBC를 사용하기 위해서는 DataSource를 bean으로 
 			등록 -->
 		<dependency>

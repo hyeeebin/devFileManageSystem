@@ -9,4 +9,6 @@ public interface UserRepository {
 	public List<UserVO> getUserList();
 	
 	public int join(Map<String,String> joinMap);
+	
+	public UserVO login(Map<String, String> loginMap);
 }

@@ -19,4 +19,8 @@
 		insert into user(id, pwd, name, dept_nm)
 		values (#{id},#{pwd},#{name},#{dept_nm})
 	</insert>
+	
+	<select id="login" resultMap="UserVO" parameterType="java.util.Map">
+		select * from user where id = #{id} and pwd = #{pwd}
+	</select>
 </mapper>

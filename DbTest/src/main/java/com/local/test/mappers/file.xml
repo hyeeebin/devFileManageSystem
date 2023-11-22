@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.local.test.dao.FileRepository">
+	<resultMap type="com.local.test.model.FileVO" id="FileVO">
+		<result column="doc_seq" property="doc_seq"/>
+		<result column="doc_sort" property="doc_sort"/>
+		<result column="doc_step" property="doc_step"/>
+		<result column="doc_activity" property="doc_activity"/>
+		<result column="doc_task" property="doc_task"/>
+		<result column="doc_output" property="doc_output"/>
+		<result column="id" property="id"/>
+		<result column="file_nm" property="file_nm"/>
+		<result column="file_pos" property="file_pos"/>
+		<result column="file_comment" property="file_comment"/>
+		<result column="file_dn_link" property="file_dn_link"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+
+	<select id="fileList" resultMap="FileVO">
+		select * from doc_info order by doc_seq
+	</select>
+
+	<insert id="uploadFile" parameterType="com.local.test.model.FileVO">
+		insert into doc_info(
+			 doc_sort, 
+			 doc_step, 
+			 doc_activity, 
+			 doc_task, 
+			 doc_output, 
+			 id, 
+			 file_nm, 
+			 file_pos, 
+			 file_comment, 
+			 remark
+		)values (
+			#{doc_sort},
+			#{doc_step},
+			#{doc_activity},
+			#{doc_task},
+			#{doc_output},
+			#{id},
+			#{file_nm},
+			#{file_pos},
+			#{file_comment},
+			#{remark}
+		)
+	</insert>
+	
+	<select id="download_file" resultType="java.util.Map" parameterType="int">
+		select * from doc_info where doc_seq = #{doc_seq}
+	</select>
+</mapper>

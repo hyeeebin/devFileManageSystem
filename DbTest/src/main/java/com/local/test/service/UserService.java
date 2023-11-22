@@ -22,4 +22,8 @@ public class UserService {
 	public int join(Map<String, String> joinMap) {
 		return userRepository.join(joinMap);
 	}
+	
+	public UserVO login(Map<String, String> loginMap) {
+		return userRepository.login(loginMap);
+	}
 }
