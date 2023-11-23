@@ -26,4 +26,12 @@ public class FileService {
 	public Map<String, Object> download_file(int doc_seq){
 		return fileRepository.download_file(doc_seq);
 	}
+	
+	public List<FileVO> myPageFile(String id) {
+		return fileRepository.myPageFile(id);
+	}
+	
+	public List<FileVO> detail_file(int doc_seq){
+		return fileRepository.detail_file(doc_seq);
+	}
 }

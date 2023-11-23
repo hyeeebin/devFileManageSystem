@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	String id = (String)session.getAttribute("userId");
+	String name = (String)session.getAttribute("userNm");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +12,7 @@
 </head>
 <body>
 	<h3>사용자 목록</h3>
+	<h3><%=name %>님 환영합니다.</h3>
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -31,5 +35,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<h3>회원 정보 상세</h3>
+	
 </body>
 </html>

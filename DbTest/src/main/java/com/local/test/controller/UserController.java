@@ -1,11 +1,9 @@
 package com.local.test.controller;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.local.test.model.FileVO;
 import com.local.test.model.UserVO;
+import com.local.test.service.FileService;
 import com.local.test.service.UserService;
 
 @Controller
@@ -25,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	FileService fileService;
 	
 	private UserVO userVO;
 	
@@ -52,7 +55,8 @@ public class UserController {
 		
 		userVO = userService.login(loginMap);
 		
-		if(userVO != null && userVO.getId() != null) {
+		if(userVO != null && !userVO.getId().equals("admin")) {
+			session.setAttribute("userInfo", userVO);
 			session.setAttribute("userId", userVO.getId());
 			session.setAttribute("userNm", userVO.getName());
 			session.setAttribute("isLoginOn", true);
@@ -60,6 +64,16 @@ public class UserController {
 			map.put("status", "true");
 			map.put("message", "로그인 성공!"+userVO.getName()+"님 환영합니다.");
 			map.put("url", "/test/file/fileList");
+		}else if(userVO != null && userVO.getId().equals("admin")){
+			session.setAttribute("userInfo", userVO);
+			session.setAttribute("userId", userVO.getId());
+			session.setAttribute("userNm", userVO.getName());
+			session.setAttribute("isLoginOn", true);
+			
+			map.put("status", "true");
+			map.put("message", "로그인 성공!"+userVO.getName()+"님 환영합니다.");
+			map.put("url", "/test/user/list");
+			
 		}else {
 			map.put("status", "false");
 			map.put("message", "로그인 실패! 다시 시도해주세요.");
@@ -105,6 +119,24 @@ public class UserController {
 		return map;
 	}
 	
-	//마이페이지 화면
 	//마이페이지 (내 정보, 내가 업로드한 문서 목록 출력)
+	@RequestMapping(value="/myPage", method=RequestMethod.GET)
+	public String myPage(HttpSession session, Model model)throws Exception{
+		
+		String id = (String) session.getAttribute("userId");
+		
+		System.out.println(id);
+		
+		List<UserVO> userInfo = userService.myPageInfo(id);
+		List<FileVO> fileInfo = fileService.myPageFile(id);
+		
+		System.out.println("userInfo :"+ userInfo);
+		System.out.println("fileInfo :"+ fileInfo);
+		
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("fileInfo",fileInfo);
+		
+		return "/user/myPage";
+	}
 }
+

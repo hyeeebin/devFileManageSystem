@@ -8,13 +8,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파일 목록</title>
+<title>마이페이지</title>
 </head>
 <body>
-<h3>파일 목록</h3>
+<h3>마이페이지</h3>
 <h3><%=name %>님 환영합니다.</h3>
-<button type="button" class="logout" id="logout">로그아웃</button>
-<button type="button" class="myPage" id="myPage">마이페이지</button>
+<h3>내 정보</h3>
+	<table>
+		<tr>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>이름</th>
+			<th>부서명</th>
+			<th>비고</th>
+			<th>가입일자</th>
+			<th>사용여부</th>
+		</tr>
+		<c:forEach var="user" items="${userInfo}">
+			<tr>
+				<td>${user.id}</td>
+				<td>${user.pwd}</td>
+				<td>${user.name}</td>
+				<td>${user.dept_nm}</td>
+				<td>${user.remark}</td>
+				<td>${user.regDate}</td>
+				<td>${user.use_yn}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+<h3>내 문서</h3>
 	<table>
 		<tr>
 			<th>순번</th>
@@ -31,7 +54,7 @@
 			<th>비고</th>
 			<th>다운로드</th>
 		</tr>
-		<c:forEach var="file" items="${fileList}">
+		<c:forEach var="file" items="${fileInfo}">
 			<tr>
 				<td>${file.doc_seq}</td>
 				<td>${file.doc_sort}</td>
@@ -40,7 +63,7 @@
 				<td>${file.doc_task}</td>
 				<td>${file.doc_output}</td>
 				<td>${file.id}</td>
-				<td><a href='<c:url value="/file/detail?doc_seq=${file.doc_seq}"/>'>${file.file_nm}</a></td>
+				<td>${file.file_nm}</td>
 				<td>${file.file_pos}</td>
 				<td>${file.file_comment}</td>
 				<td>${file.file_dn_link}</td>
@@ -49,32 +72,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<div>
-		<button type="button" onclick="location.href='uploadFileForm'" >신규파일업로드</button>
-	</div>
-	<script type="text/javascript">
-	
-	//마이페이지버튼 클릭시 진행되는 이벤트
-	const myPage = document.querySelector("#myPage");
-	myPage.onclick = function(e){
-		e.preventDefault();
-		
-		location = "/test/user/myPage";
-	}
-	
-	//로그아웃버튼 클릭시 진행되는 이벤트 
-	const logout = document.querySelector("#logout");
-	logout.onclick = function(){
-		 if (confirm("로그아웃하시겠습니까? ")) {
-	        location = "/test/user/logout";
-	        alert("로그아웃 되었습니다.");
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
-	
-	
-</script>
+	<button type="button" onclick="location.href='/test/file/fileList'">파일목록으로 돌아가기</button>
 </body>
 </html>

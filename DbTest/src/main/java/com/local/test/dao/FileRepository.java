@@ -12,4 +12,8 @@ public interface FileRepository {
 	public int uploadFile(FileVO fileVO);
 	
 	public Map<String, Object> download_file(int doc_seq);
+	
+	public List<FileVO> myPageFile(String id);
+	
+	public List<FileVO> detail_file(int doc_seq);
 }

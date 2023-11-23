@@ -7,19 +7,7 @@
 <title>신규파일업로드</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	
-	//취소버튼 클릭시 진행되는 이벤트 
-	const delBtn = document.querySelector(".delBtn");
-	delBtn.onclick = function(){
-		if (confirm("작업을 중단하고 파일목록으로 이동하시겠습니까?")) {
-	        location = "/test/file/fileList";
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
-</script>
+
 <body>
 <div class="container">
 		<h3>신규파일업로드</h3>
@@ -68,6 +56,18 @@
 			<button type="button" class="delBtn" id="delBtn">취소</button>
 		</form>
 	</div>
-
+	<script type="text/javascript">
+		
+		//취소버튼 클릭시 진행되는 이벤트 
+		const delBtn = document.querySelector(".delBtn");
+		delBtn.onclick = function(){
+			if (confirm("작업을 중단하고 파일목록으로 이동하시겠습니까?")) {
+		        location = "/test/file/fileList";
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+	</script>
 </body>
 </html>

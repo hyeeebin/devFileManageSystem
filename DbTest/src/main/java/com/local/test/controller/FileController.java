@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.local.test.model.FileVO;
 import com.local.test.service.FileService;
@@ -123,7 +124,8 @@ public class FileController {
 		File file = new File(filePath, fileName);
 		
 		byte[] byteFile = FileUtils.readFileToByteArray(file);
-		//파일유형설정        
+		
+		//파일유형설정    이진 파일을 위한 기본 값. 
 		response.setContentType("application/octet-stream");         
 		//파일길이설정        
 		response.setContentLength(byteFile.length);        
@@ -138,5 +140,20 @@ public class FileController {
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 		
+	}
+	
+	//문서 정보 상세 보기 
+	@RequestMapping(value="/detail" , method = RequestMethod.GET)
+	public ModelAndView detail(@RequestParam("doc_seq") int doc_seq) {
+		List<FileVO> fileDetail = fileService.detail_file(doc_seq);
+		System.out.println(fileDetail);
+		
+		String viewName = "/file/file_detail";
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName(viewName);
+		mav.addObject("fileDetail", fileDetail);
+		
+		return mav;
 	}
 }

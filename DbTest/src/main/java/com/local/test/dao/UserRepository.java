@@ -11,4 +11,6 @@ public interface UserRepository {
 	public int join(Map<String,String> joinMap);
 	
 	public UserVO login(Map<String, String> loginMap);
+	
+	public List<UserVO> myPageInfo(String id);
 }

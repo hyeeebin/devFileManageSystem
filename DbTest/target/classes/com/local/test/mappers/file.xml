@@ -49,4 +49,12 @@
 	<select id="download_file" resultType="java.util.Map" parameterType="int">
 		select * from doc_info where doc_seq = #{doc_seq}
 	</select>
+	
+	<select id="myPageFile" resultType="com.local.test.model.FileVO" parameterType="String">
+		select  * from doc_info where id = #{id}
+	</select>
+	
+	<select id="detail_file" resultType="com.local.test.model.FileVO" parameterType="int">
+		select * from doc_info where doc_seq = #{doc_seq}
+	</select>
 </mapper>

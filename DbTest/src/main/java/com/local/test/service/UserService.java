@@ -26,4 +26,8 @@ public class UserService {
 	public UserVO login(Map<String, String> loginMap) {
 		return userRepository.login(loginMap);
 	}
+	
+	public List<UserVO> myPageInfo(String id) {
+		return userRepository.myPageInfo(id);
+	}
 }
